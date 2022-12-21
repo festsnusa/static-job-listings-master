@@ -1,0 +1,45 @@
+include data.pug
+      
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Static Job Listings
+    link(rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png")
+    link(rel="stylesheet", href="./style.css")
+  body
+    header.header
+    .header__overlay
+    main.main
+      .cards
+        .cards__card.cards__filter
+          .cards__filter_box
+          span.cards__clear Clear
+        each value in arr
+          .cards__card(id= value["id"])
+            .cards__left
+              img.cards__image(src=value["logo"], alt="logo")
+              .cards__header
+                .cards__box
+                  p.cards__title= value["company"]
+                  .cards__properties
+                    if (value["new"])
+                      .cards__button.cards__button_new new!
+                    if (value["featured"])
+                      .cards__button.cards__button_featured featured 
+                a.cards__position(href="#!" aria-label="position")= value["position"]
+                ul.cards__list 
+                  li.cards__item= value["postedAt"]
+                  li.cards__item= value["contract"]
+                  li.cards__item= value["location"]
+            hr
+            ul.cards__footer
+              li.cards__requirement= value["role"]
+              li.cards__requirement= value["level"]
+              each item in value.tools
+                li.cards__requirement= item
+              each item in value.languages
+                li.cards__requirement= item
+    script(src="./app.js")
